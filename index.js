@@ -1,35 +1,11 @@
-const { ApolloServer, gql } = require('apollo-server');
+const { ApolloServer } = require('apollo-server');
 const mongoose = require('mongoose');
-const { MongoClient } = require('mongodb');
 const { MONGODB } = require('./config');
 
-const books = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin',
-  },
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster',
-  },
-];
-
-const typeDefs = gql`
-  type Book {
-    title: String
-    author: String
-  }
-
-  type Query {
-    books: [Book]
-  }
-`;
-
-const resolvers = {
-  Query: {
-    books: () => books,
-  },
-};
+// typeDefs
+const typeDefs = require('./graphql/typeDefs');
+// resolvers
+const resolvers = require('./graphql/resolvers');
 
 const server = new ApolloServer({ typeDefs, resolvers });
 

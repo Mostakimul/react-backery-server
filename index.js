@@ -1,4 +1,7 @@
 const { ApolloServer, gql } = require('apollo-server');
+const mongoose = require('mongoose');
+const { MongoClient } = require('mongodb');
+const { MONGODB } = require('./config');
 
 const books = [
   {
@@ -30,7 +33,16 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-// The `listen` method launches a web server.
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+// connect to database
+mongoose
+  .connect(MONGODB, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Database connected');
+    return server.listen({ port: 5000 });
+  })
+  .then((res) => {
+    console.log(`🚀  Server ready at ${res.url}`);
+  })
+  .catch((err) => {
+    console.log(err);
+  });

@@ -64,5 +64,6 @@ module.exports = gql`
     createCategory(body: String!): Category!
     deleteCategory(catId: ID!): String!
     addProduct(productInput: ProductInput): Product!
+    deleteProduct(prodId: ID!): String!
   }
 `;

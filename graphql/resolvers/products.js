@@ -61,5 +61,22 @@ module.exports = {
         throw new Error(error);
       }
     },
+
+    // deleteing a product
+    async deleteProduct(_, { prodId }, context) {
+      const user = checkAuth(context);
+
+      try {
+        if (user.email !== 'admin@gmail.com') {
+          throw new AuthenticationError('You do not have permission!');
+        } else {
+          const product = await Products.findById(prodId);
+          await product.delete();
+          return 'Product deleted successfully!';
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
   },
 };

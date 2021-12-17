@@ -1,6 +1,7 @@
 // models
 const Categories = require('../../models/Categories');
 const checkAuth = require('../../util/checkAuth');
+const { AuthenticationError } = require('apollo-server');
 
 module.exports = {
   Query: {
@@ -25,6 +26,7 @@ module.exports = {
     },
   },
   Mutation: {
+    // create a category
     async createCategory(_, { body }, context) {
       const user = checkAuth(context);
 
@@ -40,6 +42,22 @@ module.exports = {
           const category = await newCategory.save();
 
           return category;
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    // delete a category
+    async deleteCategory(_, { catId }, context) {
+      const user = checkAuth(context);
+
+      try {
+        if (user.email !== 'admin@gmail.com') {
+          throw new AuthenticationError('You do not have permission!');
+        } else {
+          const category = await Categories.findById(catId);
+          await category.delete();
+          return 'Category deleted successfully!';
         }
       } catch (error) {
         throw new Error(error);

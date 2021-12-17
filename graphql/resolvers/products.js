@@ -9,7 +9,7 @@ module.exports = {
       try {
         return await Products.find();
       } catch (error) {
-        console.log(error);
+        throw new Error(error);
       }
     },
   },

@@ -48,6 +48,7 @@ module.exports = gql`
   type Query {
     getCategories: [Category]
     getCategory(catId: ID!): Category
+    getProducts: [Product]
   }
 
   # user registration mutation

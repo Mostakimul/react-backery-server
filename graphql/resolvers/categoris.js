@@ -5,6 +5,7 @@ const { AuthenticationError } = require('apollo-server');
 
 module.exports = {
   Query: {
+    // fetch all categoris
     getCategories: async () => {
       try {
         return await Categories.find();
@@ -12,6 +13,7 @@ module.exports = {
         console.log(error);
       }
     },
+    // fetch single category
     getCategory: async (_, { catId }) => {
       try {
         const category = await Categories.findById(catId);
@@ -32,7 +34,7 @@ module.exports = {
 
       try {
         if (user.email !== 'admin@gmail.com') {
-          throw new Error('You do not have permission!');
+          throw new AuthenticationError('You do not have permission!');
         } else {
           const newCategory = new Categories({
             categoryName: body,

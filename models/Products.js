@@ -7,7 +7,7 @@ const productsSchema = new Schema({
   description: String,
   isAvailable: Boolean,
   quantity: Number,
-  category: SchemaTypes.ObjectId,
+  category: String,
   createdAt: String,
 });
 

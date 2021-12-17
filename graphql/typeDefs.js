@@ -35,6 +35,16 @@ module.exports = gql`
     email: String!
   }
 
+  # product input field
+  input ProductInput {
+    productName: String!
+    price: Float!
+    image: String!
+    description: String!
+    quantity: Int!
+    category: String!
+  }
+
   type Query {
     getCategories: [Category]
     getCategory(catId: ID!): Category
@@ -46,5 +56,6 @@ module.exports = gql`
     login(username: String!, password: String!): User!
     createCategory(body: String!): Category!
     deleteCategory(catId: ID!): String!
+    addProduct(productInput: ProductInput): Product!
   }
 `;

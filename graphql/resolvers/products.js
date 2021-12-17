@@ -12,6 +12,21 @@ module.exports = {
         throw new Error(error);
       }
     },
+    // fetching single product
+    getProduct: async (_, { prodId }) => {
+      try {
+        console.log(prodId);
+        const product = await Products.findById(prodId);
+        console.log(product);
+        if (product) {
+          return product;
+        } else {
+          throw new Error('Product not found!');
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
   },
   Mutation: {
     // adding a product

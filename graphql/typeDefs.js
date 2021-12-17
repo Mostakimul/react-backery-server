@@ -1,11 +1,14 @@
 const { gql } = require('apollo-server');
 
 module.exports = gql`
+  # category type
   type Category {
     id: ID!
     categoryName: String!
     createdAt: String!
   }
+
+  # product type
   type Product {
     id: ID!
     productName: String!
@@ -18,6 +21,7 @@ module.exports = gql`
     createdAt: String!
   }
 
+  # user type
   type User {
     id: ID!
     email: String!
@@ -45,13 +49,15 @@ module.exports = gql`
     category: String!
   }
 
+  # all queries
   type Query {
     getCategories: [Category]
     getCategory(catId: ID!): Category
     getProducts: [Product]
+    getProduct(prodId: ID!): Product
   }
 
-  # user registration mutation
+  # all mutation
   type Mutation {
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!

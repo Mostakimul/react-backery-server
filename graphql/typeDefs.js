@@ -6,12 +6,24 @@ module.exports = gql`
     categoryName: String!
     createdAt: String!
   }
+  type Product {
+    id: ID!
+    productName: String!
+    price: Float!
+    image: String!
+    description: String!
+    isAvailable: Boolean!
+    quantity: Int!
+    category: String!
+    createdAt: String!
+  }
 
   type User {
     id: ID!
     email: String!
     token: String!
     username: String!
+    isAdmin: Boolean
     createdAt: String!
   }
 
@@ -25,11 +37,14 @@ module.exports = gql`
 
   type Query {
     getCategories: [Category]
+    getCategory(catId: ID!): Category
   }
 
   # user registration mutation
   type Mutation {
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
+    createCategory(body: String!): Category!
+    deleteCategory(catId: ID!): String!
   }
 `;

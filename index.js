@@ -7,7 +7,7 @@ const typeDefs = require('./graphql/typeDefs');
 // resolvers
 const resolvers = require('./graphql/resolvers');
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ typeDefs, resolvers, context: ({ req }) => ({ req }) });
 
 // connect to database
 mongoose

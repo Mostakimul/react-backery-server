@@ -60,7 +60,7 @@ module.exports = {
     },
 
     // User Registration
-    async register(_, { registerInput: { username, password, confirmPassword, email } }) {
+    async register(_, { registerInput: { username, password, confirmPassword, email, isAdmin } }) {
       // validation
       const { valid, errors } = validateRegisterInput(username, password, confirmPassword, email);
       if (!valid) {
@@ -87,6 +87,7 @@ module.exports = {
         email,
         username,
         password,
+        isAdmin: false,
         createdAt: new Date().toISOString(),
       });
 

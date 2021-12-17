@@ -30,6 +30,12 @@ module.exports = {
   Mutation: {
     // create a category
     async createCategory(_, { body }, context) {
+      // check if category is empty
+      if (body.trim() === '') {
+        throw new Error('Category can not be empty!');
+      }
+
+      // check user is authincated
       const user = checkAuth(context);
 
       try {
